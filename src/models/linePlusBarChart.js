@@ -19,6 +19,7 @@ nv.models.linePlusBarChart = function() {
     , getX = function(d) { return d.x }
     , getY = function(d) { return d.y }
     , color = nv.utils.defaultColor()
+    , id = Math.floor(Math.random() * 10000)
     , showLegend = true
     , tooltips = true
     , tooltip = function(key, x, y, e, graph) {
@@ -209,6 +210,7 @@ nv.models.linePlusBarChart = function() {
       bars
         .width(availableWidth)
         .height(availableHeight)
+        .id(id)
         .color(data.map(function(d,i) {
           return d.color || color(d, i);
         }).filter(function(d,i) { return !data[i].disabled && data[i].bar }))
@@ -408,6 +410,12 @@ nv.models.linePlusBarChart = function() {
   chart.noData = function(_) {
     if (!arguments.length) return noData;
     noData = _;
+    return chart;
+  };
+  
+  chart.id = function(_) {
+    if (!arguments.length) return id;
+    id = _;
     return chart;
   };
 
